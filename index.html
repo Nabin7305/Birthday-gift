@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Amisha 🎉</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+      overflow:hidden;
+      padding:20px;
+    }
+
+    .container{
+      width:100%;
+      max-width:420px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(12px);
+      border-radius:25px;
+      padding:30px 25px;
+      text-align:center;
+      color:white;
+      box-shadow:0 10px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 1.5s ease;
+      position:relative;
+    }
+
+    h1{
+      font-size:2rem;
+      margin-bottom:10px;
+      animation: pop 1.2s ease infinite alternate;
+    }
+
+    h2{
+      font-size:1.2rem;
+      margin-bottom:18px;
+      font-weight:400;
+    }
+
+    .cake{
+      font-size:70px;
+      margin:15px 0;
+      animation: bounce 2s infinite;
+    }
+
+    p{
+      font-size:1rem;
+      line-height:1.7;
+      margin-bottom:25px;
+    }
+
+    .btn{
+      background:white;
+      color:#ff4f81;
+      border:none;
+      padding:14px 28px;
+      border-radius:50px;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover{
+      transform:scale(1.05);
+      background:#ffe6ee;
+    }
+
+    .gift-box{
+      display:none;
+      margin-top:25px;
+      animation: fadeIn 1s ease;
+    }
+
+    .gift{
+      font-size:80px;
+      animation: shake 1s infinite;
+    }
+
+    .gift-message{
+      margin-top:15px;
+      font-size:1.1rem;
+      font-weight:600;
+      color:#fff;
+    }
+
+    .hearts{
+      position:absolute;
+      width:100%;
+      height:100%;
+      top:0;
+      left:0;
+      overflow:hidden;
+      z-index:-1;
+    }
+
+    .heart{
+      position:absolute;
+      color:rgba(255,255,255,0.7);
+      animation: float 6s linear infinite;
+      font-size:20px;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(100vh) scale(0);
+      }
+      100%{
+        transform:translateY(-120px) scale(1.5);
+      }
+    }
+
+    @keyframes pop{
+      from{transform:scale(1);}
+      to{transform:scale(1.08);}
+    }
+
+    @keyframes bounce{
+      0%,100%{transform:translateY(0);}
+      50%{transform:translateY(-10px);}
+    }
+
+    @keyframes shake{
+      0%{transform:rotate(0);}
+      25%{transform:rotate(5deg);}
+      50%{transform:rotate(-5deg);}
+      75%{transform:rotate(5deg);}
+      100%{transform:rotate(0);}
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:480px){
+      h1{
+        font-size:1.7rem;
+      }
+
+      p{
+        font-size:0.95rem;
+      }
+
+      .btn{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="cake">🎂</div>
+
+    <h1>Happy Birthday Dear Amisha 💖</h1>
+    <h2>Wishing you endless happiness & love ✨</h2>
+
+    <p>
+      Dear Amisha,<br><br>
+      On your special day, I wish your life becomes filled with beautiful moments,
+      sweet smiles, success, love, and unforgettable memories.
+      May your birthday be as amazing and lovely as you are 💕
+    </p>
+
+    <button class="btn" onclick="openGift()">
+      🎁 Open Surprise Gift
+    </button>
+
+    <div class="gift-box" id="giftBox">
+      <div class="gift">💝</div>
+      <div class="gift-message">
+        Surprise! 🌸<br>
+        You are the most precious gift in this world 💖
+      </div>
+    </div>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    // Floating hearts
+    const hearts = document.getElementById("hearts");
+
+    for(let i = 0; i < 30; i++){
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+      hearts.appendChild(heart);
+    }
+
+    // Confetti burst
+    function startConfetti(){
+      confetti({
+        particleCount: 180,
+        spread: 120,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // Run confetti on load
+    window.onload = () => {
+      startConfetti();
+
+      setInterval(() => {
+        confetti({
+          particleCount: 70,
+          spread: 90,
+          origin: {
+            x: Math.random(),
+            y: Math.random() - 0.2
+          }
+        });
+      }, 2500);
+    };
+
+    // Surprise Gift
+    function openGift(){
+      document.getElementById("giftBox").style.display = "block";
+
+      confetti({
+        particleCount: 250,
+        spread: 150,
+        origin: { y: 0.5 }
+      });
+    }
+  </script>
+
+</body>
+</html>
